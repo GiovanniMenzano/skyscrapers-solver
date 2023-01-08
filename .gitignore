@@ -1,0 +1,368 @@
+### Git ###
+
+# Created by git for backups. To disable backups in Git: $ git config --global mergetool.keepBackup false
+*.orig
+
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
+
+# Tortoise git
+/.tgitconfig
+
+# Diff
+*.patch
+*.diff
+
+
+
+### Package Files ###
+
+# Comment those lines if you wish to keep it. For example in old Java projects using external libraries.
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+
+
+### Java ###
+
+# Compiled class file
+*.class
+classes/
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+*.java.hsp
+
+# gwt caches and compiled units
+war/gwt_bree/
+gwt-unitCache/
+
+# more caches and things from deploy
+war/WEB-INF/deploy/
+war/WEB-INF/classes/
+
+# compilation logs
+.gwt/
+
+# gwt junit compilation files
+www-test/
+
+# old GWT (1.5) created this dir
+.gwt-tmp/
+
+# Jboss
+jboss/server/all/deploy/project.ext
+jboss/server/default/deploy/project.ext
+jboss/server/minimal/deploy/project.ext
+jboss/server/all/log/*.log
+jboss/server/all/tmp/**/*
+jboss/server/all/data/**/*
+jboss/server/all/work/**/*
+jboss/server/default/log/*.log
+jboss/server/default/tmp/**/*
+jboss/server/default/data/**/*
+jboss/server/default/work/**/*
+jboss/server/minimal/log/*.log
+jboss/server/minimal/tmp/**/*
+jboss/server/minimal/data/**/*
+jboss/server/minimal/work/**/*
+
+# deployed package files
+*.DEPLOYED
+
+
+
+### AWS ###
+
+# CDK asset staging directory. Website: https://docs.aws.amazon.com/cdk/
+.cdk.staging/
+cdk.out/
+
+# AWS Serverless Application Model project build folder. Website: https://docs.aws.amazon.com/serverless-application-model
+.aws-sam/
+
+
+
+### Eclipse ###
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+# Comment this line if you wish to keep the project description file. Typically, this file would be tracked if it contains build/dependency configurations
+.project
+
+
+
+### STS ###
+
+.classpath
+.springBeans
+.sts4-cache
+spring-*/src/main/java/META-INF/MANIFEST.MF
+
+
+
+### IntelliJ IDEA ###
+
+.idea
+out/
+test-output/
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files, since they will be recreated. Comment if not using auto-import.
+.idea/artifacts
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.iml
+*.ipr
+
+# File-based project format
+*.iws
+
+# CMake
+cmake-build-*/
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# SonarLint plugin
+.idea/sonarlint/
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+
+
+### NetBeans ###
+
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+
+### VS Code ###
+
+.vscode/
+
+
+
+### Maven ###
+
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+
+
+### Gradle ###
+
+# TODO check
+.gradle
+**/build/
+!src/**/build/
+buildSrc/build
+/spring-*/build
+/framework-bom/build
+/framework-docs/build
+/integration-tests/build
+/src/asciidoc/build
+spring-test/test-output/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrapper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
+
+
+### Windows ###
+
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+
+### Some additional ignores ###
+*.DS_Store
+*.sw?
+.#*
+*#
+*~
+bin
+build
+target
+*.sublime-*
+/scratch	   
+README.html
+.exercism
+*.sonarj
+*.sw*
+.DS_Store
+build.sh
+integration-repo
+ivy-cache
+argfile*
+activemq-data/

@@ -1,0 +1,70 @@
+position:	[1:0] = 1
+south:		2(visible skyscrapers from south first col) > 1(south constraint for first column)
+
+  4 2 1 2 3
+3|2|3|5|4|1|3
+2|1|0|0|0|0|4
+3|0|0|0|0|0|1
+2|0|0|0|0|0|2
+1|0|0|0|0|0|2
+ (1)4 3 2 2
+
+South constraint for col 0 is 1, because the last number in row should be 5, but since there is still a 0,
+the validity algorithm will see either 1 and 2 (2 skyscrapers instead of 1) and will return false.
+
+Previous code:
+
+private boolean checkLocalConstraints(int row, int col) {
+	int constraint;
+	int visibleSkyscrapers;
+	int maxHeight;
+	
+	// NORTH, so the constraint is in position [col number]
+	constraint = constraints.get("north")[col];
+	visibleSkyscrapers = maxHeight = 0;
+	for(int i = 0; i < outputBoard.length; i++) {
+		if(outputBoard[i][col].getValue() > maxHeight) {
+			visibleSkyscrapers++;
+			maxHeight = outputBoard[i][col].getValue();
+			if(visibleSkyscrapers > constraint)
+				return false;
+		}
+	}
+	
+	// EAST, so the constraint is in position [row number]
+	constraint = constraints.get("east")[row];
+	visibleSkyscrapers = maxHeight = 0;
+	for(int i = outputBoard.length - 1; i <= 0; i--) {
+		if(outputBoard[row][i].getValue() > maxHeight) {
+			visibleSkyscrapers++;
+			maxHeight = outputBoard[row][i].getValue();
+			if(visibleSkyscrapers > constraint)
+				return false;
+		}
+	}
+	
+	// SOUTH, so the constraint is in position [col number]
+	constraint = constraints.get("south")[col];
+	visibleSkyscrapers = maxHeight = 0;
+	for(int i = outputBoard.length - 1; i >= 0; i--) {
+		if(outputBoard[i][col].getValue() > maxHeight) {
+			visibleSkyscrapers++;
+			maxHeight = outputBoard[i][col].getValue();
+			if(visibleSkyscrapers > constraint)
+				return false;
+		}
+	}
+	
+	// WEST, so the constraint is in position [row number]
+	constraint = constraints.get("west")[row];
+	visibleSkyscrapers = maxHeight = 0;
+	for(int i = 0; i < outputBoard.length; i++) {
+		if(outputBoard[row][i].getValue() > maxHeight) {
+			visibleSkyscrapers++;
+			maxHeight = outputBoard[row][i].getValue();
+			if(visibleSkyscrapers > constraint)
+				return false;
+		}
+	}
+	return true;
+}
