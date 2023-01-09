@@ -16,8 +16,10 @@ import com.giovannimenzano.skyscraperssolver.utils.*;
 /*
 example on how to call this controller
 
-POST localhost/skyscrapers/solve?solutions=1
+POST
+localhost:8090/solvers/skyscrapers/solve?solutions=1
 
+BODY
 {
     "inputBoard": [
         [0, 4, 2, 1, 2, 3, 0],
