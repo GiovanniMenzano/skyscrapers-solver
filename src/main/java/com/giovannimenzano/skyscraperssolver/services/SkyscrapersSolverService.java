@@ -269,7 +269,7 @@ public class SkyscrapersSolverService extends Problem<Cell<Integer>, Integer> {
 	}
 	
 	@Override
-	protected void deassign(Cell<Integer> point) {
+	protected void unassign(Cell<Integer> point) {
 		point.setValue(0);
 	}
 	

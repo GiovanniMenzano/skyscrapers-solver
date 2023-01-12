@@ -1,0 +1,75 @@
+* {
+	font-family: monospace, 'Helvetica', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+.container {
+	margin: 10px 0 10px 0;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.grid {
+	margin: 0 10px 0 10px;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: repeat(7, 1fr);
+	grid-gap: 1px;
+	width: 300px;
+	height: 300px;
+}
+
+.cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	border: 1px solid #999;
+	border-radius: 5px;
+}
+
+.cell--clue {
+	background-color: #ccc;
+}
+
+.cell--input {
+	background-color: #fff;
+}
+
+input[type=number] {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 16px;
+	border: none;
+	background-color: transparent;
+	/* remove arrows on input type number */
+	-moz-appearance: textfield;
+}
+
+/* remove arrows on input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+button {
+	margin: 0 10px 0 10px;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #333;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+}

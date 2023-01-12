@@ -47,13 +47,18 @@ public abstract class Problem<P, S> {
 		
 		for(S option : optionsList) {
 			
-			if(stop) return; // exit point for the recursive function in case of a defined stop condition. It could be used to stop recursion if a the number of solutions to be found is reached.
+			/*
+			 * exit point for the recursive function in case of a defined stop condition. 
+			 * It could be used to stop recursion if a the number of solutions to be found is reached.
+			 * Or by a timeout function (not yet implemented).
+			 */
+			if(stop) return;
 			
 			/*
-			 * Procedure:
-			 * 1) assign value
-			 * 2) check validity and continue to next point or save solution
-			 * 3) deassign value in any case, before next iteration
+			 * procedure:
+			 * 1) assign value;
+			 * 2) check validity and continue to next point or save solution;
+			 * 3) unassign value, before next iteration.
 			 */
 			assign(option, point);
 			
@@ -65,7 +70,7 @@ public abstract class Problem<P, S> {
 				}
 			}
 			
-			deassign(point);
+			unassign(point);
 			
 		}
 		
@@ -86,7 +91,7 @@ public abstract class Problem<P, S> {
 	
 	protected abstract void assign(S option, P point);
 	
-	protected abstract void deassign(P point);
+	protected abstract void unassign(P point);
 	
 	protected abstract boolean isValidOption(S option, P point);
 	
