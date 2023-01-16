@@ -11,116 +11,145 @@
 
 <body>
 	<section>
-		<div class="wrapper">
-			<h1>Skyscrapers</h1>
+		
+		<div class="container">
+			<div class="row">
+				<div class="wrapper">
+					<h1>Skyscrapers</h1>
+				</div>
+			</div>
 		</div>
+
 	</section>
 
-	<form action="">
+	<form id="solver-form" action="#">
 
 		<div class="container">
+			
+			<div class="row">
+				<div class="wrapper">
 
-			<div class="wrapper">
+					<label for="requested-solutions">requested solutions:</label>
+					<select id="requested-solutions">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
 
-				<label for="solutions">requested solutions:</label>
-				<select id="solutions">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select>
-
+				</div>
 			</div>
-
-			<div class="wrapper">
-				<div>solution number: <span id="current-solution">0</span>/<span id="solutions-found">0</span></div>
+				
+			<div class="row">
+				<div class="wrapper">
+					<div>solution number: <span id="current-solution">0</span>/<span id="solutions-found">0</span></div>
+				</div>
 			</div>
 
 		</div>
+		
 		<div class="container">
-			<div class="wrapper">
-
-				<button id="previuos-solution">&lt;</button>
-
-				<div class="grid">
-			
-					<div class="cell--angle"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="4"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="1"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="3"></div>
-					<div class="cell--angle"></div>
-			
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="3"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="3"></div>
-			
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="4"></div>
-			
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="3"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="1"></div>
-			
-			
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-			
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="1"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--input"><input type="number" min="0" max="4" value="0"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-			
-					<div class="cell--angle"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="1"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="4"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="3"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="2"></div>
-					<div class="cell cell--clue"><input type="number" min="0" max="4" value="1"></div>
-					<div class="cell--angle"></div>
-			
+			<div class="row">
+				
+				<div class="wrapper">
+					<button id="previous-solution">&lt;</button>
+				</div>
+				
+				<div class="wrapper">
+					<div class="grid">
+				
+						<div class="cell cell--angle"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="4"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="1"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="3"></div>
+						<div class="cell cell--angle"></div>
+				
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="3"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="3"></div>
+				
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="4"></div>
+				
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="3"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="1"></div>
+				
+				
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+				
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="1"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--input"><input type="number" maxlength="1" min="1" min="5" value="0"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+				
+						<div class="cell cell--angle"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="1"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="4"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="3"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+						<div class="cell cell--clue"><input type="number" maxlength="1" min="1" min="5" value="2"></div>
+						<div class="cell cell--angle"></div>
+				
+					</div>
 				</div>
 
-				<button id="previuos-solution">&gt;</button>
+				<div class="wrapper">
+					<button id="next-solution">&gt;</button>
+				</div>
 
 			</div>
 		</div>
 
 		<div class="container">
-			<div class="wrapper">
-				<button id="solve-button" type="submit">Solve</button>
-				<button id="reset-button" type="reset">Reset</button>
+			<div class="row">
+
+				<div class="wrapper">
+					<button id="solve-button" type="submit">Solve</button>
+				</div>
+
+				<div class="wrapper">
+					<button id="reset-button" type="reset">Reset</button>
+				</div>
+
 			</div>
 		</div>
 	</form>
+
+	<!-- SCRIPTS -->
+	<link rel="prefetch" href="./js/init.js">
+	<script src="./js/init.js" defer></script>
+	<!-- END SCRIPTS -->
 
 </body>
 

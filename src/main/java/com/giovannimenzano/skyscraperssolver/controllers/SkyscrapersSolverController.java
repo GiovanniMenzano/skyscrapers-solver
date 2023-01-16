@@ -17,7 +17,7 @@ import com.giovannimenzano.skyscraperssolver.utils.*;
 example on how to call this controller
 
 POST
-localhost:8090/solvers/skyscrapers/solve?solutions=1
+localhost:8090/solvers/skyscrapers/solve?requestedSolutions=1
 
 BODY
 {
@@ -41,7 +41,7 @@ public class SkyscrapersSolverController {
     private SkyscrapersSolverService solverService;
     
     @PostMapping("/solve")
-    public ResponseEntity<CustomResponse<?>> solve(@RequestParam("solutions") int requestedSolutions, @RequestBody InputBoardRequest inputBoardRequest) {
+    public ResponseEntity<CustomResponse<?>> solve(@RequestParam("requestedSolutions") int requestedSolutions, @RequestBody InputBoardRequest inputBoardRequest) {
     	
         // set the input grid and the requested number of solutions in the service
     	solverService.setInputBoard(Cell.toCellArray(inputBoardRequest.getInputBoard()));

@@ -9,23 +9,30 @@
 }
 
 .container {
-	margin: 10px 0 10px 0;
+	/* padding: 80px 0; */
 }
 
-.wrapper {
+.row {
+	width: 100%;
+	max-width: 800px;
+	margin: 10px auto;
+	padding: 0 12px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
+.wrapper {
+	margin: auto 10px;
+}
+
 .grid {
-	margin: 0 10px 0 10px;
+	width: 300px;
+	height: 300px;
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	grid-template-rows: repeat(7, 1fr);
 	grid-gap: 1px;
-	width: 300px;
-	height: 300px;
 }
 
 .cell {
@@ -43,6 +50,10 @@
 
 .cell--input {
 	background-color: #fff;
+}
+
+.cell--angle {
+	visibility: hidden;
 }
 
 input[type=number] {
@@ -64,7 +75,6 @@ input::-webkit-inner-spin-button {
 }
 
 button {
-	margin: 0 10px 0 10px;
 	padding: 10px 15px;
 	border: none;
 	border-radius: 5px;
