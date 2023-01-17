@@ -19,15 +19,38 @@ let gridDimension = Math.sqrt(gridElement.querySelectorAll(".cell").length);
 let solutions = [];
 let currentSolutionIndex = 0;
 
+// removed form to properly validate fields without default HTML validation
+/*
 document.querySelector("#solver-form").addEventListener("submit", function(event) {
 
 	console.log("form submit event received");
-
-	// document.getElementById("submit-button").setAttribute("disabled", true); // since I'm making the call to the solver service, I disable the submit button
 	
+	// the submit event is fired, this means I'm making the call to the solver service, so I disable the submit button and enable it again when the response is received
+	document.getElementById("submit-button").setAttribute("disabled", true);
 	event.preventDefault(); // allow customized form submit via event listener on solve button
 
 });
+*/
+
+// event listener for cell inputs
+gridElement.addEventListener("input", (e) => {
+
+	// listener is added to the grid, but the target are the input cells
+    if (e.target.matches("input")) {
+
+		// the max number the user can type is the grid dimension minus two, corresponding to the game table dimension
+		const maxInput = gridDimension - 2;
+        // delete every character not matching a number between 1 and the max number
+		e.target.value = e.target.value.replace(new RegExp("[^1-" + maxInput + "]", "g"),"");
+
+		// force user to insert only one character
+		if (e.target.value.length > 1) {
+            e.target.value = e.target.value.slice(1, 2);
+        }
+
+    }
+
+}, true);
 
 // event listener for solve button
 solveButtonElement.addEventListener("click", async () => {
@@ -35,8 +58,7 @@ solveButtonElement.addEventListener("click", async () => {
 	/*
 	convert grid to array
 	if cell has no input (angle cell) or cell input value is null, return 0
-	*/
-	debugger;
+	*/debugger;
 	// const inputBoard = Array.from(gridElement.querySelectorAll(".cell"), cell => {
 	// 	if (cell.input && cell.input.value) {
 	// 		return cell.input.value;
@@ -44,10 +66,10 @@ solveButtonElement.addEventListener("click", async () => {
 	// 		return 0;
 	// 	}
 	// });
-	
+
 	// one line version of the code above
-	const grid = Array.from(gridElement.querySelectorAll(".cell"), cell => (cell.firstChild && cell.firstChild.value) || '0');
-	
+	const grid = Array.from(gridElement.querySelectorAll(".cell"), cell => (cell.firstChild && cell.firstChild.valueAsNumber) || 0);
+
 	const inputBoard = [];
 	while (grid.length) {
 		inputBoard.push(grid.splice(0, gridDimension));
@@ -101,4 +123,9 @@ function fillGrid(solution) {
 	solutions.forEach((value, index) => {
 		grid.querySelectorAll(".cell")[index].value = value;
 	});
+}
+
+function escapeRegex(regex) {
+    return regex.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, '\\$&'); // full version
+	// return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&'); // short version
 }
