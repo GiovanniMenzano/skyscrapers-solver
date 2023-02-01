@@ -1,12 +1,9 @@
 package com.giovannimenzano.skyscraperssolver.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import com.giovannimenzano.skyscraperssolver.exceptions.CustomException;
-import com.giovannimenzano.skyscraperssolver.exceptions.MissingInputsExceptions;
 import com.giovannimenzano.skyscraperssolver.utils.ExceptionUtils;
 
 /*
@@ -16,26 +13,29 @@ import com.giovannimenzano.skyscraperssolver.utils.ExceptionUtils;
  * one by one, and saves all solved configurations.
  * A problem could be for example Sudoku, Futoshiki, Skyscrapers, etc.
  */
-
-public abstract class Problem<P, S> {
+public abstract class ProblemSolver<P, S> {
 	
-	/*
-	 * variable stop is used to stop template method (e.g. if all wanted solutions are found)
-	 * Its state is changed most likely by saveSolutions(), but it's sub class responsibility to do so
-	 */
-	protected boolean stop = false;
-	protected List<S> optionsList = new ArrayList<S>();
-	/*
-	 * TODO only solution I found for not getting instantiation errors in the concrete class
-	 * TODO add generic type
-	 */
+	protected List<S> optionsList;
 	protected List<P[][]> solutionsList;
+	protected int requestedSolutions;
+	protected boolean stop;
 	
 	/*
 	 * entry point, method used to start the computation from the first point or part of the problem
 	 */
 	public void start() throws CustomException {
+		
+		this.stop = false;
 		solve(firstPoint());
+		
+	}
+	
+	/*
+	 * method used to stop solve method (e.g. if all wanted solutions are found)
+	 * Its state is changed most likely by saveSolutions(), but it's sub class responsibility to do so
+	 */
+	public void stop() {
+		this.stop = true;
 	}
 
 	/*
@@ -75,18 +75,22 @@ public abstract class Problem<P, S> {
 		}
 		
 	}
-	
-	public List<P[][]> getSolutionsList() {
-		Collections.shuffle(solutionsList);
-		return solutionsList;
-	}
 
 	public boolean isStopped() {
 		return stop;
 	}
 	
-	public void stop() {
-		stop = true;
+	public List<P[][]> getSolutionsList() {
+		Collections.shuffle(solutionsList);
+		return solutionsList;
+	}
+	
+	public int getRequestedSolutions() {
+		return requestedSolutions;
+	}
+
+	public void setRequestedSolutions(int requestedSolutions) {
+		this.requestedSolutions = requestedSolutions;
 	}
 	
 	protected abstract void assign(S option, P point);
@@ -106,4 +110,6 @@ public abstract class Problem<P, S> {
 	protected abstract void saveSolution();
 	
 	protected abstract boolean missingInputs();
+	
+	protected abstract void initialize();
 }

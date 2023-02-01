@@ -61,20 +61,6 @@ public class Cell<V> {
 		setPosition(new int[] {position});
 	}
 	
-	@Override
-	public String toString() {
-		return value.toString();
-	}
-	
-	public boolean equals(Object o) {
-		if(!(o instanceof Cell))
-			return false;
-		if(o == this)
-			return true;
-		Cell c = (Cell) o;
-		return getValue().equals(c.getValue());
-	}
-	
 	/**
 	Converts a 2D array of integers into a 2D array of Cell objects.
 	Each Cell is created using the corresponding element in the integer array
@@ -110,6 +96,37 @@ public class Cell<V> {
 				integerBoard[i][j] = cellBoard[i][j].getValue();
 		
 		return integerBoard;
+		
+	}
+	
+	public boolean equals(Object o) {
+		if(!(o instanceof Cell))
+			return false;
+		if(o == this)
+			return true;
+		Cell c = (Cell) o;
+		return getValue().equals(c.getValue());
+	}
+	
+	@Override
+	public String toString() {
+		return value.toString();
+	}
+	
+	public static void printBoard(Cell<?>[][] solution) {
+		
+		String nl = System.getProperty("line.separator"); // newline
+		StringBuilder sb = new StringBuilder(500);
+		
+		sb.append(nl);
+		for(int i = 0; i < solution.length; i++) {
+			sb.append("|");
+			for(int j = 0; j < solution[0].length; j++)
+				sb.append(solution[i][j].getValue() + "|");
+			sb.append(nl);
+		}
+		
+		System.out.println(sb.toString());
 		
 	}
 	

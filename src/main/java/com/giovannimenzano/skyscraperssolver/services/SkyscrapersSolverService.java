@@ -2,43 +2,49 @@ package com.giovannimenzano.skyscraperssolver.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.giovannimenzano.skyscraperssolver.entities.Cell;
 
 @Component
-public class SkyscrapersSolverService extends Problem<Cell<Integer>, Integer> {
-	
+public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integer> {
+
 	private Cell<Integer>[][] outputBoard;
 	private HashMap<String, int[]> clues;
-	private int requestedSolutions;
 	
 	public SkyscrapersSolverService() {
 		
+		this.optionsList = new ArrayList<Integer>();
+		this.solutionsList = new ArrayList<Cell<Integer>[][]>();
+		this.clues = new HashMap<String, int[]>();
 		this.requestedSolutions = 1;
-		solutionsList = new ArrayList<Cell<Integer>[][]>();
+		this.stop = false;
 		
 	}
 	
 	public void setInputBoard(Cell<Integer>[][] inputBoard) {
 		
+		this.initialize();
+		
 		/*
 		 * at this point I know you are already wondering "why does he pass a whole board
 		 * filled with zeroes when he can just pass 4 array containing the clues?".
 		 * Well, first of all, it's none of your business :). And second, because by doing this I could
-		 * allow the frontend to send me half solved boards, if the user wants to.
+		 * allow the client to send me half solved boards, if the user wants to.
 		 */
-		this.outputBoard = new Cell[inputBoard.length - 2][inputBoard.length - 2]; // TODO review
+		this.outputBoard = new Cell[inputBoard.length - 2][inputBoard.length - 2];
 		
 		/*
 		 * I build a new board with only solvable positions to make algorithm easier to read and write,
 		 * leaving out external clues.
-		 * With this loop I'm building the list of options to be used by the algorithm (in this case I'm just filling it with numbers from 1 to N (dimension of board))
+		 * With the outer loop I'm also building the list of options to be used by the algorithm (in this case I'm just filling it with numbers from 1 to N dimension of board).
+		 * TODO fill with input values
 		 */
 		for(int i = 0; i < outputBoard.length; i++) {
-			optionsList.add(i, i + 1);
 			
+			optionsList.add(i, i + 1);
 			for(int j = 0; j < outputBoard.length; j++) {
 				this.outputBoard[i][j] = new Cell<Integer>(0, new int[] {i, j});
 			}
@@ -47,9 +53,7 @@ public class SkyscrapersSolverService extends Problem<Cell<Integer>, Integer> {
 		
 		/*
 		 * now I build my lists of clues to simplify future use
-		 */
-		clues = new HashMap<String, int[]>();
-		
+		 */		
 		// NORTH
 		int[] northClues = new int[inputBoard.length - 2];
 		for(int i = 1; i < inputBoard.length - 1; i++) {
@@ -79,13 +83,13 @@ public class SkyscrapersSolverService extends Problem<Cell<Integer>, Integer> {
 		clues.put("west", westClues);
 		
 	}
-	
-	public int getRequestedSolutions() {
-		return requestedSolutions;
-	}
 
-	public void setRequestedSolutions(int requestedSolutions) {
-		this.requestedSolutions = requestedSolutions;
+	@Override
+	protected void initialize() {
+
+		this.optionsList.clear();
+		this.solutionsList.clear();
+		
 	}
 
 	/*
@@ -312,7 +316,8 @@ public class SkyscrapersSolverService extends Problem<Cell<Integer>, Integer> {
 				toSave[i][j] = new Cell(outputBoard[i][j]);
 		
 		solutionsList.add(toSave);
-		
+		Cell.printBoard(toSave);
+		System.out.println();
 		if(solutionsList.size() == requestedSolutions)
 			stop();
 		
@@ -326,4 +331,5 @@ public class SkyscrapersSolverService extends Problem<Cell<Integer>, Integer> {
 		return false;
 		
 	}
+	
 }

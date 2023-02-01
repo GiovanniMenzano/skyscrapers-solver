@@ -33,6 +33,7 @@ BODY
 }
 */
 
+@CrossOrigin
 @RestController
 @RequestMapping("/skyscrapers")
 public class SkyscrapersSolverController {
@@ -51,7 +52,7 @@ public class SkyscrapersSolverController {
         try {
 			solverService.start();
 		} catch (CustomException e) {
-			// return a response with an error status and message to the frontend
+			// return a response with an error status and message to the client
 	        return ResponseUtils.buildFailedOperationResponse(e);
 		}
         
