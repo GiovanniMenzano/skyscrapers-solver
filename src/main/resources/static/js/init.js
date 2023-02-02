@@ -60,7 +60,7 @@ gridElement.addEventListener("input", (e) => {
 
 previousButtonElement.addEventListener("click", () => {
 
-	if(solutions.length > 0) {
+	if(solutions.length > 1) {
 		currentSolutionIndex = currentSolutionIndex > 0 ? currentSolutionIndex - 1 : solutions.length - 1;
 		currentSolutionElement.innerHTML = currentSolutionIndex + 1;
 		fillGrid(solutions[currentSolutionIndex], true);
@@ -70,7 +70,7 @@ previousButtonElement.addEventListener("click", () => {
 
 nextButtonElement.addEventListener("click", () => {
 
-	if(solutions.length > 0) {
+	if(solutions.length > 1) {
 		currentSolutionIndex = currentSolutionIndex < solutions.length - 1 ? currentSolutionIndex + 1 : 0;
 		currentSolutionElement.innerHTML = currentSolutionIndex + 1;
 		fillGrid(solutions[currentSolutionIndex], true);
@@ -109,7 +109,7 @@ solveButtonElement.addEventListener("click", async () => {
 
 	// make the REST call
 	try {
-		debugger;
+
 		let response = await fetch(protocol + host + endpoint + "?" + requestedSolutionsParameter + requestedSolutions + "&t=" + timestamp, {
 			method: "POST",
 			body: JSON.stringify({ inputBoard: inputBoard }),
@@ -121,7 +121,7 @@ solveButtonElement.addEventListener("click", async () => {
 				"expires": "0"
 			}
 		});
-		debugger;
+
 		if(response.status !== 200) { // can also be !response.ok to be more generic
 			throw new Error(response.message + " : " + response.statusText); // TODO test using response.statusText
 		} // TODO check for specific error codes
@@ -131,10 +131,11 @@ solveButtonElement.addEventListener("click", async () => {
 
 		// update solution count and current solution
 		solutionsFoundElement.innerHTML = solutions.length;
-		currentSolutionElement.innerHTML = currentSolutionIndex + 1;
+		currentSolutionElement.innerHTML = 1;
+		currentSolutionIndex = 0;
 
 		// fill the grid with the first solution
-		fillGrid(solutions[currentSolutionIndex], true);
+		fillGrid(solutions[0], true);
 
 	} catch(error) {
 
@@ -165,6 +166,7 @@ exampleButtonElement.addEventListener("click", () => {
 function resetSolutions() {
 
 	solutions = [];
+	currentSolutionIndex = 0;
 	solutionsFoundElement.innerHTML = 0;
 	currentSolutionElement.innerHTML = 0;
 
