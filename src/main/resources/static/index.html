@@ -5,8 +5,8 @@
 
 	<link rel="preload" as="style" href="./css/index.css">
 	<link rel="stylesheet" href="./css/index.css">
-	<title>Skyscrapers</title>
-	
+	<title>Skyscrapers solver</title>
+
 </head>
 
 <body>
@@ -38,16 +38,19 @@
 						<option value="4">4</option>
 						<option value="5" selected="selected">5</option>
 						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
 					</select>
 
 				</div>
 			</div>
 
 			<div class="row">
+
 				<div class="wrapper">
 
 					<label for="requested-solutions" class="tooltip">requested solutions: <span class="tooltiptext">higher the number, higher the time for the service to reply</span></label>
-					<select id="requested-solutions">
+					<!-- <select id="requested-solutions">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -58,9 +61,11 @@
 						<option value="8">8</option>
 						<option value="9">9</option>
 						<option value="10">10</option>
-					</select>
+					</select> -->
+					<input id="requested-solutions" type="number" value="1">
 
 				</div>
+				
 			</div>
 				
 			<div class="row">

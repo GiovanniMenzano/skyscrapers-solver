@@ -64,6 +64,10 @@
 	opacity: 1;
 }
 
+#requested-solutions {
+	width: 30px;
+}
+
 .grid {
 	width: 300px;
 	height: 300px;
@@ -94,7 +98,7 @@
 	visibility: hidden;
 }
 
-input[type=number] {
+.cell input[type=number] {
 	width: 100%;
 	height: 100%;
 	text-align: center;

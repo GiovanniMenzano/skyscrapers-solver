@@ -1,8 +1,6 @@
 package com.giovannimenzano.skyscraperssolver.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.stereotype.Component;
 
@@ -20,7 +18,6 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 		this.solutionsList = new ArrayList<Cell<Integer>[][]>();
 		this.clues = new HashMap<String, int[]>();
 		this.requestedSolutions = 1;
-		this.stop = false;
 		
 	}
 	
@@ -315,9 +312,9 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 			for(int j = 0; j < outputBoard.length; j++)
 				toSave[i][j] = new Cell(outputBoard[i][j]);
 		
+        Cell.printBoard(toSave); // TODO remove
+        System.out.println("#########################"); // TODO remove
 		solutionsList.add(toSave);
-		Cell.printBoard(toSave);
-		System.out.println();
 		if(solutionsList.size() == requestedSolutions)
 			stop();
 		

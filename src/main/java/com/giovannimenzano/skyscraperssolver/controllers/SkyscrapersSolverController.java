@@ -1,5 +1,6 @@
 package com.giovannimenzano.skyscraperssolver.controllers;
 
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class SkyscrapersSolverController {
     @Autowired
     private SkyscrapersSolverService solverService;
     
+    private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    
     @PostMapping("/solve")
     public ResponseEntity<CustomResponse<?>> solve(@RequestParam("requestedSolutions") int requestedSolutions, @RequestBody InputBoardRequest inputBoardRequest) {
     	
@@ -50,6 +53,7 @@ public class SkyscrapersSolverController {
         
         // start the solving process
         try {
+			executorService.schedule(() -> solverService.stop(), 5, TimeUnit.SECONDS);
 			solverService.start();
 		} catch (CustomException e) {
 			// return a response with an error status and message to the client

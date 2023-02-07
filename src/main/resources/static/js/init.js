@@ -22,32 +22,62 @@ const exampleValues =
 	[1, 0, 0, 0, 0, 0, 2],
 	[0, 1, 4, 3, 2, 2, 0]];
 
-const protocol = "http://";
-const host = "127.0.0.1:8090";
-const endpoint = "/solvers/skyscrapers/solve";
-const requestedSolutionsParameter = "requestedSolutions=";
+const PROTOCOL = "http://";
+const HOST = "127.0.0.1:8090";
+const ENDPOINT = "/solvers/skyscrapers/solve";
+const REQUESTED_SOLUTION_PARAMETER = "requestedSolutions=";
 
 let solutions = [];
 let currentSolutionIndex = 0;
+const NEXT_SOLUTION = 1;
+const PREVIOUS_SOLUTION = -1;
+
+document.addEventListener("keydown", (event) => {
+
+	switch(event.key) {
+		case "ArrowLeft":
+			event.preventDefault();
+			showSolution(PREVIOUS_SOLUTION);
+			break;
+		case "ArrowRight":
+			event.preventDefault();
+			showSolution(NEXT_SOLUTION);
+			break;
+	}
+
+});
 
 boardDimensionElement.addEventListener("change", () => {
 
 	resetSolutions();
-	const dimension = parseInt(boardDimensionElement.value) + 2;
-	changeGridDimension(dimension);
+	changeGridDimension(parseInt(boardDimensionElement.value) + 2);
+
+});
+
+requestedSolutionsElement.addEventListener("input", () => {
+
+	const limit = 1000;
+	let value = parseInt(requestedSolutionsElement.value);
+
+	if(!isNaN(value)) {
+		value = Math.min(value, limit);
+		requestedSolutionsElement.value = value;
+	} else {
+		requestedSolutionsElement.value = "";
+	}
 
 });
 
 // event listener for cell inputs
 gridElement.addEventListener("input", (e) => {
 
-	// listener is added to the grid, but the target are the input cells
+	// listener has been linked to the grid, but the target are the input cells
 	if(e.target.matches("input")) {
 
-		// the max number the user can type is the grid dimension minus two, corresponding to the game board dimension
-		const maxInput = parseInt(boardDimensionElement.value);
-		// delete every character not matching a number between 1 and the max number for the selected board
-		e.target.value = e.target.value.replace(new RegExp("[^1-" + maxInput + "]", "g"), "");
+		// the limit number the user can type is the same as the game board dimension, like sudoku
+		const limit = parseInt(boardDimensionElement.value);
+		// delete every character not matching a number between 1 and the limit
+		e.target.value = e.target.value.replace(new RegExp("[^1-" + limit + "]", "g"), "");
 
 		// force user to insert only one character
 		if(e.target.value.length > 1) {
@@ -60,21 +90,13 @@ gridElement.addEventListener("input", (e) => {
 
 previousButtonElement.addEventListener("click", () => {
 
-	if(solutions.length > 1) {
-		currentSolutionIndex = currentSolutionIndex > 0 ? currentSolutionIndex - 1 : solutions.length - 1;
-		currentSolutionElement.innerHTML = currentSolutionIndex + 1;
-		fillGrid(solutions[currentSolutionIndex], true);
-	}
+	showSolution(PREVIOUS_SOLUTION);
 
 });
 
 nextButtonElement.addEventListener("click", () => {
 
-	if(solutions.length > 1) {
-		currentSolutionIndex = currentSolutionIndex < solutions.length - 1 ? currentSolutionIndex + 1 : 0;
-		currentSolutionElement.innerHTML = currentSolutionIndex + 1;
-		fillGrid(solutions[currentSolutionIndex], true);
-	}
+	showSolution(NEXT_SOLUTION);
 
 });
 
@@ -110,20 +132,20 @@ solveButtonElement.addEventListener("click", async () => {
 	// make the REST call
 	try {
 
-		let response = await fetch(protocol + host + endpoint + "?" + requestedSolutionsParameter + requestedSolutions + "&t=" + timestamp, {
+		let response = await fetch(PROTOCOL + HOST + ENDPOINT + "?" + REQUESTED_SOLUTION_PARAMETER + requestedSolutions + "&t=" + timestamp, {
 			method: "POST",
 			body: JSON.stringify({ inputBoard: inputBoard }),
 			cache: 'no-store',
 			headers: {
 				"content-type": "application/json",
 				"cache-control": "no-store", // headers to prevent caching
-				"pragma": "no-cache", // deprecated but I was told to add it anyway by some really competent people *stackoverflow AHEM*
+				"pragma": "no-cache", // deprecated but I was told to add it anyway by some really competent people, A.K.A. StackOverflow
 				"expires": "0"
 			}
 		});
 
 		if(response.status !== 200) { // can also be !response.ok to be more generic
-			throw new Error(response.message + " : " + response.statusText); // TODO test using response.statusText
+			throw new Error(response.message + " : " + response.statusText);
 		} // TODO check for specific error codes
 
 		let jsonResponse = await response.json();
@@ -162,6 +184,23 @@ exampleButtonElement.addEventListener("click", () => {
 	fillGrid(exampleValues, false);
 
 });
+
+function showSolution(direction) {
+
+	if(solutions.length > 1) {
+
+		if(direction < 0 ) {
+			currentSolutionIndex = currentSolutionIndex > 0 ? currentSolutionIndex - 1 : solutions.length - 1;
+		} else if(direction > 0) {
+			currentSolutionIndex = currentSolutionIndex < solutions.length - 1 ? currentSolutionIndex + 1 : 0;
+		}
+
+		currentSolutionElement.innerHTML = currentSolutionIndex + 1;
+		fillGrid(solutions[currentSolutionIndex], true);
+
+	}
+
+}
 
 function resetSolutions() {
 
@@ -211,6 +250,25 @@ function fillGrid(values, noFrame) {
 			cellsIndex++;
 		}
 	}
+
+}
+
+function hasDuplicateSolutions(arr) {
+
+	const set = new Set();
+
+	for(let i = 0; i < arr.length; i++) {
+
+		const str = JSON.stringify(arr[i]);
+		if(set.has(str)) {
+			console.log("duplicate: \n" + str);
+			return true;
+		}
+		set.add(str);
+
+	}
+
+	return false;
 
 }
 
