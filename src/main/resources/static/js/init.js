@@ -151,13 +151,19 @@ solveButtonElement.addEventListener("click", async () => {
 		let jsonResponse = await response.json();
 		solutions = jsonResponse.result;
 
-		// update solution count and current solution
-		solutionsFoundElement.innerHTML = solutions.length;
-		currentSolutionElement.innerHTML = 1;
-		currentSolutionIndex = 0;
+		if(solutions.length > 0) {
 
-		// fill the grid with the first solution
-		fillGrid(solutions[0], true);
+			// update solution count and current solution
+			solutionsFoundElement.innerHTML = solutions.length;
+			currentSolutionElement.innerHTML = 1;
+			currentSolutionIndex = 0;
+
+			// fill the grid with the first solution
+			fillGrid(solutions[0], true);
+
+		} else {
+			alert("No solution found");
+		}
 
 	} catch(error) {
 
