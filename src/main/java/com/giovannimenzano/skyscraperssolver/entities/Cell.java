@@ -40,6 +40,14 @@ public class Cell<V> {
 		this.state = state;
 	}
 	
+	public boolean isStatePreassigned() {
+		return this.state == State.PREASSIGNED ? true : false;
+	}
+	
+	public boolean isStateAssigned() {
+		return this.state == State.ASSIGNED ? true : false;
+	}
+	
 	public V getValue() {
 		return value;
 	}

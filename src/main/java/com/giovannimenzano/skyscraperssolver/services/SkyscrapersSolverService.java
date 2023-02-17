@@ -5,6 +5,8 @@ import java.util.*;
 import org.springframework.stereotype.Component;
 
 import com.giovannimenzano.skyscraperssolver.entities.Cell;
+import com.giovannimenzano.skyscraperssolver.exceptions.*;
+import com.giovannimenzano.skyscraperssolver.utils.ExceptionUtils;
 
 @Component
 public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integer> {
@@ -34,16 +36,15 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 		this.outputBoard = new Cell[inputBoard.length - 2][inputBoard.length - 2];
 		
 		/*
-		 * I build a new board with only solvable positions to make algorithm easier to read and write,
+		 * I build a new board without the frame, containing the clues, to make algorithm easier to read and write,
 		 * leaving out external clues.
 		 * With the outer loop I'm also building the list of options to be used by the algorithm (in this case I'm just filling it with numbers from 1 to N dimension of board).
-		 * TODO fill with input values
 		 */
 		for(int i = 0; i < outputBoard.length; i++) {
 			
 			optionsList.add(i, i + 1);
 			for(int j = 0; j < outputBoard.length; j++) {
-				this.outputBoard[i][j] = new Cell<Integer>(0, new int[] {i, j});
+				this.outputBoard[i][j] = new Cell<Integer>(inputBoard[i + 1][j + 1].getValue(), new int[] {i, j});
 			}
 			
 		}
@@ -230,7 +231,7 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 	}
 	
 	/*
-	 * TODO test, probably useless
+	 * TODO test, unused
 	 * check every clue on a side, called by checkClues()
 	 */
 	private boolean checkSide(String side) {
@@ -266,12 +267,14 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 	
 	@Override
 	protected void assign(Integer option, Cell<Integer> point) {
-		point.setValue(option);
+		if(!point.isStatePreassigned())
+			point.setValue(option);
 	}
 	
 	@Override
 	protected void unassign(Cell<Integer> point) {
-		point.setValue(0);
+		if(!point.isStatePreassigned())
+			point.setValue(0);
 	}
 	
 	@Override
@@ -279,6 +282,7 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 		
 		int row = currentPoint.getPosition()[0];
 		int col = currentPoint.getPosition()[1];
+		
 		if(col == outputBoard.length - 1) { // if col is the last one, go to next row
 			row++;
 			col = 0;
@@ -312,8 +316,8 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 			for(int j = 0; j < outputBoard.length; j++)
 				toSave[i][j] = new Cell(outputBoard[i][j]);
 		
-        Cell.printBoard(toSave); // TODO remove
-        System.out.println("#########################"); // TODO remove
+		// Cell.printBoard(toSave); // TODO enable for debug
+		// System.out.println("#########################");
 		solutionsList.add(toSave);
 		if(solutionsList.size() == requestedSolutions)
 			stop();
@@ -321,12 +325,23 @@ public class SkyscrapersSolverService extends ProblemSolver<Cell<Integer>, Integ
 	}
 
 	@Override
+	protected void checkInputData() {
+		
+		if(missingInputs()) throw new CustomException(ExceptionUtils.MISSING_INPUTS);
+		else if(alreadySolved()) throw new CustomException(ExceptionUtils.ALREADY_SOLVED);
+		
+	}
+
 	protected boolean missingInputs() {
 		
 		if(this.outputBoard == null)
 			return true;
 		return false;
 		
+	}
+
+	private boolean alreadySolved() {
+		return false;
 	}
 	
 }

@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.giovannimenzano.skyscraperssolver.exceptions.CustomException;
-import com.giovannimenzano.skyscraperssolver.utils.ExceptionUtils;
 
 /*
  * abstract class providing a template method suitable for a generic problem solvable with
@@ -25,11 +24,12 @@ public abstract class ProblemSolver<P, S> {
 	 */
 	public void start() throws CustomException {
 		
+		checkInputData();
 		this.stop = false;
 		solve(firstPoint());
 		
 	}
-	
+
 	/*
 	 * method used to stop solve method (e.g. if all wanted solutions are found)
 	 * Its state is changed most likely by saveSolutions(), but it's sub class responsibility to do so
@@ -42,8 +42,6 @@ public abstract class ProblemSolver<P, S> {
 	 * template method
 	 */
 	public void solve(P point) throws CustomException {
-		
-		if(missingInputs()) throw new CustomException(ExceptionUtils.MISSING_INPUTS);
 		
 		for(S option : optionsList) {
 			
@@ -109,7 +107,7 @@ public abstract class ProblemSolver<P, S> {
 	
 	protected abstract void saveSolution();
 	
-	protected abstract boolean missingInputs();
+	protected abstract void checkInputData();
 	
 	protected abstract void initialize();
 }
